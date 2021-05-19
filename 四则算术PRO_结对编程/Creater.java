@@ -4,21 +4,16 @@ package arithmetic;
 public class Creater {
 
 	formJudge fj = new formJudge();
-	//´´½¨¹¹Ôìº¯Êı
+	//åˆ›å»ºæ„é€ å‡½æ•°
 	public Creater() {
 		
 	}
-	//´´½¨Ò»¸öĞÂÌâÄ¿
-	/*´´½¨Ë¼Â·£ºÊ×ÏÈÍ¨¹ıËæ»úÊıÀ´È·¶¨Éú³ÉµÄÌâÄ¿ÖĞÓĞ¼¸¸öÊı×Ö£¬È»ºóÍ¨¹ıforÑ­»·
-	 * Ñ­»·Éú³É2*n¸öËæ»úÊı£¬ÕâÊ±Ã¿Á½¸öËæ»úÊı¿ÉÒÔ×é³ÉÒ»¸ö·ÖÊı£¬²¢ÇÒ¸ù¾İÒªÇóµÄ
-	 * ĞÎÊ½»¯¼ò£¬½Ó×ÅÍ¨¹ıËæ»úÊıÀ´ÅĞ¶ÏÉú³ÉµÄÔËËã·û´Ó¶øËæ»úÉú³Én-1¸öÔËËã·û£¬È»ºó½«
-	 * ÕâĞ©°´Ë³ĞòÁ¬½Ó³É×Ö·û´®·µ»Ø*/
 	public numItem pro_creater(int range) {
-		//´´½¨rc£¬rn£¬roÀ´´æ´¢Ëæ»úÊı´Ó¶øËæ¼´µÃµ½
+		//åˆ›å»ºrcï¼Œrnï¼Œroæ¥å­˜å‚¨éšæœºæ•°ä»è€Œéšå³å¾—åˆ°
 		int rc,rn,ro;
 		numItem str = new numItem();
-		String [] ch = new String[] {"+","-","¡Á","¡Â"};
-			rc = (int)(Math.random()*3+2);//Ëæ»úÉú³É2~4µÄÊıÀ´ÅĞ¶ÏÉú³É¼¸¸öÊı
+		String [] ch = new String[] {"+","-","Ã—","Ã·"};
+			rc = (int)(Math.random()*3+2);//éšæœºç”Ÿæˆ2~4çš„æ•°æ¥åˆ¤æ–­ç”Ÿæˆå‡ ä¸ªæ•°
 			int [] a = new int[2*rc]; 
 			for(int i=0; i < 2*rc; i++) {
 				a[i] = 1;
@@ -27,7 +22,7 @@ public class Creater {
 			String [] num_str1 = new String[rc];
 			String [] b = new String[rc-1];
 			for(int j = 0; j < rc; j++) {
-				rn = (int)(Math.random()*(2-0));//Ëæ»úÉú³É0ºÍ1ÅĞ¶ÏÉú³ÉÕæ·ÖÊı»òÕûÊıºÍ´ø·ÖÊı
+				rn = (int)(Math.random()*(2-0));//éšæœºç”Ÿæˆ0å’Œ1åˆ¤æ–­ç”ŸæˆçœŸåˆ†æ•°æˆ–æ•´æ•°å’Œå¸¦åˆ†æ•°
 				if(rn == 1) {
 					a[2*j+1] = (int)(Math.random()*range+1);
 					a[2*j] = (int)(Math.random()*(a[2*j+1]-1)+1);
@@ -43,21 +38,16 @@ public class Creater {
 			}
 				
 			for(int k =0; k < rc-1; k++) {
-				ro = (int)(Math.random()*(4-0));//Éú³É0µ½3µÄËæ»úÊıÀ´ÅĞ¶ÏÉú³ÉÊ²Ã´ÔËËã·û
+				ro = (int)(Math.random()*(4-0));//ç”Ÿæˆ0åˆ°3çš„éšæœºæ•°æ¥åˆ¤æ–­ç”Ÿæˆä»€ä¹ˆè¿ç®—ç¬¦
 					b[k] = ch[ro];
 			}
 			
-			//¼ÓÀ¨ºÅ
+			//åŠ æ‹¬å·
 			str = parent_creater(rc,num_str,num_str1,b);	
 			
 		return str;
 	}
-	//Ìí¼ÓÀ¨ºÅ
-	/*Ë¼Â·£ºÉú³ÉÒ»¸öËæ»úÊıÀ´ÅĞ¶ÏÉú³É¶àÉÙ¸öÀ¨ºÅ£¬×óÀ¨ºÅºÍÓÒÀ¨ºÅ±ØĞë³É¶Ô³öÏÖ£¬¹¹½¨Ò»¸ö
-	 * ×îÖÕ×Ö·û´®Êı×é£¬Ò»¸ö×óÀ¨ºÅÎ»ÖÃÊı×éºÍÒ»¸öÓÒÀ¨ºÅÎ»ÖÃÊı×é£¬Èç¹ûÊÇÁ½¸öÊı×ÖÔò²»ÓÃÉú
-	 * ³ÉÀ¨ºÅ£¬Èç¹ûÊÇÁ½¸öÒÔÉÏÔòËæ»úÉú³É×î¶àn/2+1¸öÀ¨ºÅ£¬Éú³É¸Ã·¶Î§ÄÚµÄËæ»úÊıÀ´ÅĞ¶ÏÉú
-	 * ³É¶àÉÙÀ¨ºÅ£¬ÏÈÉú³ÉËæ»ú×óÀ¨ºÅµÄÎ»ÖÃ£¬È»ºó¸ù¾İ×óÀ¨ºÅÎ»ÖÃËæ»úÉú³ÉÓÒÀ¨ºÅÎ»ÖÃ£¬²¢½«
-	 * Á½¸öÍ¬Ê±·ÅÈëÊı×é£¬ÈôÓÒÀ¨ºÅÎ»ÖÃÕÒ³ö·¶Î§ÔòÍ£Ö¹£¬×îºó½«ËûÃÇºÍÒÑÓĞ×Ö·ûÁ¬½ÓÉú³É×îÖÕÊ½×Ó*/
+
 	public numItem parent_creater(int rc, String [] num_str, String [] num_str1, String [] b) {
 		numItem str = new numItem();
 		String [] spl = new String[rc];
@@ -74,8 +64,8 @@ public class Creater {
 			else {
 				int lmin = 0;
 				for(int i = 0; i < rp; i++) {
-					int rpl = (int)(Math.random()*(rc-1-lmin)+lmin);//Éú³É×óÀ¨ºÅÎ»ÖÃ
-      				int rpr = (int)(Math.random()*(rc-rpl-1)+rpl+1);//¸ù¾İ×óÀ¨ºÅÎ»ÖÃÉú³ÉÓÒÀ¨ºÅÎ»ÖÃ
+					int rpl = (int)(Math.random()*(rc-1-lmin)+lmin);//ç”Ÿæˆå·¦æ‹¬å·ä½ç½®
+      				int rpr = (int)(Math.random()*(rc-rpl-1)+rpl+1);//æ ¹æ®å·¦æ‹¬å·ä½ç½®ç”Ÿæˆå³æ‹¬å·ä½ç½®
 					if(rpl == 0 && rpr ==rc-1) {
 						i--;
 						continue;
@@ -108,7 +98,7 @@ public class Creater {
 	
 }
 
-//Ò»¸öÊ½×ÓµÄ´æ´¢ĞÎÊ½
+//ä¸€ä¸ªå¼å­çš„å­˜å‚¨å½¢å¼
 class numItem {
 	String oldstr;
 	String newstr;
