@@ -50,11 +50,11 @@ public class Jfra{
 		  }
 		 }
 	
-	Jfra(){//Éú³É¿ÉÊÓ»¯½çÃæ
+	Jfra(){//ç”Ÿæˆå¯è§†åŒ–ç•Œé¢
 		jfr = new JFrame();
-		jfr.setTitle("ËÄÔòÔËËã");
+		jfr.setTitle("å››åˆ™è¿ç®—");
 		jfr.setSize(1320,850);
-		InitGlobalFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 20));
+		InitGlobalFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 20));
 		JPanel p = new JPanel();
 		JPanel p1 = new JPanel();
 		JPanel p2 = new JPanel();
@@ -64,18 +64,18 @@ public class Jfra{
 		p1.add("North",p2);
 		p1.add("Center",p3);
 		jfr.add("Center",p1);
-	    JButton b1 = new JButton("Éú³ÉÌâÄ¿");
-	    JButton b2 = new JButton("±£´æÎÄ¼ş");
-	    JButton b3 = new JButton("ÉÏ´«´ğ°¸");
-	    JButton b4 = new JButton("ºË¶Ô´ğ°¸");
-	    Dimension preferredSize = new Dimension(150,35);//ÉèÖÃ³ß´ç
+	    JButton b1 = new JButton("ç”Ÿæˆé¢˜ç›®");
+	    JButton b2 = new JButton("ä¿å­˜æ–‡ä»¶");
+	    JButton b3 = new JButton("ä¸Šä¼ ç­”æ¡ˆ");
+	    JButton b4 = new JButton("æ ¸å¯¹ç­”æ¡ˆ");
+	    Dimension preferredSize = new Dimension(150,35);
 	    b1.setPreferredSize(preferredSize );
 	    b2.setPreferredSize(preferredSize );
 	    b3.setPreferredSize(preferredSize );
 	    b4.setPreferredSize(preferredSize );
-	    Label l1 = new Label("Éú³ÉÌâÄ¿                                               ");
-	    Label l2 = new Label("ÊäÈë/ÉÏ´«´ğ°¸");
-	    Label l3 = new Label("                                            ºË¶ÔÇé¿ö");
+	    Label l1 = new Label("ç”Ÿæˆé¢˜ç›®                                                  ");
+	    Label l2 = new Label("è¾“å…¥/ä¸Šä¼ ç­”æ¡ˆ");
+	    Label l3 = new Label("                                                  æ ¸å¯¹æƒ…å†µ");
 	    JTextArea a1 = new JTextArea(30,30);
 	    JTextArea a2 = new JTextArea(30,30);
 	    JTextArea a3 = new JTextArea(30,30);
@@ -100,45 +100,44 @@ public class Jfra{
 	    p3.add(js3);
 	    jfr.setVisible(true);
 	    Creater ct = new Creater();
-	    List<String> anslist = new ArrayList<String>();
-	    //µã»÷Éú³ÉÌâÄ¿ÊÂ¼ş
+	    List<String> anslist = new ArrayList<String>();  //ç‚¹å‡»ç”Ÿæˆé¢˜ç›®
 	    b1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+			
 
 				a1.setText("");
 				a2.setText("");
 				a3.setText("");
 				anslist.clear();
-				//²úÉú´°¿ÚÈÃÓÃ»§ÉèÖÃÌâÄ¿¸öÊıºÍÊıÖµ·¶Î§
+				//äº§ç”Ÿçª—å£è®©ç”¨æˆ·è®¾ç½®é¢˜ç›®ä¸ªæ•°å’Œæ•°å€¼èŒƒå›´
 				String num = JOptionPane.showInputDialog(
 						jfr,
-						"ÇëÊäÈëĞèÒªÉú³ÉµÄÌâÄ¿¸öÊı£¨²»ÄÜ³¬¹ı10000£©£º",
+						"è¯·è¾“å…¥éœ€è¦ç”Ÿæˆçš„é¢˜ç›®ä¸ªæ•°ï¼ˆä¸èƒ½è¶…è¿‡10000ï¼‰ï¼š",
 						"");
 				String range = JOptionPane.showInputDialog(
 						jfr,
-						"ÇëÊäÈëĞèÒªÉú³ÉµÄÊıÖµ·¶Î§£º",
+						"è¯·è¾“å…¥éœ€è¦ç”Ÿæˆçš„æ•°å€¼èŒƒå›´ï¼š",
 						"");
 				if(Integer.parseInt(num) > 10000) { 
-					JOptionPane.showMessageDialog(jfr, "ÊäÈëÌâÄ¿¸öÊı³¬³ö·¶Î§£¬ÇëÖØĞÂÊäÈë");
+					JOptionPane.showMessageDialog(jfr, "è¾“å…¥é¢˜ç›®ä¸ªæ•°è¶…å‡ºèŒƒå›´ï¼Œè¯·é‡æ–°è¾“å…¥");
 				}
 				else if(range == null) { 
-					JOptionPane.showMessageDialog(jfr, "ÇëÊäÈëÊıÖµ·¶Î§");
+					JOptionPane.showMessageDialog(jfr, "è¯·è¾“å…¥æ•°å€¼èŒƒå›´");
 				}
 				else {
 					String[] str = new String[Integer.parseInt(num)];
 					HashSet<String> phashSet = new HashSet<String>();
 					formJudge fj = new formJudge();
 					DupCheck dc = new DupCheck();
-					//Ñ­»·ÊµÏÖ²úÉúnum¸öÌâÄ¿
+					//å¾ªç¯å®ç°äº§ç”Ÿnumä¸ªé¢˜ç›®
 					for(int i=0; i<str.length; i++) {
 						numItem nit = new numItem();
 						nit = ct.pro_creater(Integer.parseInt(range));
 						String result = fj.calculate(nit.oldstr);
 						String pos = fj.listToString(fj.infix2postfix(fj.parse(nit.oldstr)));
-						if( result == null || !phashSet.add(pos) || dc.muldupcheck(nit.newstr,str)) {//Èç¹û³öÏÖ²»ºÏ·¨²Ù×÷»òÖØ¸´Ê½×ÓÔòÖØĞÂ²úÉúÒ»ÌõÌâÄ¿
+						if( result == null || !phashSet.add(pos) || dc.muldupcheck(nit.newstr,str)) {//è‹¥å‡ºç°ä¸åˆæ³•æ“ä½œæˆ–é‡å¤å¼å­åˆ™é‡æ–°äº§ç”Ÿä¸€æ¡é¢˜ç›®
 							i--;
 				        }
 						else {
@@ -152,13 +151,13 @@ public class Jfra{
 	    	
 	    	
 	    });
-	    //µã»÷±£´æÎÄ¼şµÄÊÂ¼ş
+	    //ç‚¹å‡»ä¿å­˜æ–‡ä»¶çš„äº‹ä»¶
 	    b2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				FileDialog fd = new FileDialog(jfr,"Áí´æÎª",FileDialog.SAVE);
+		
+				FileDialog fd = new FileDialog(jfr,"å¦å­˜ä¸º",FileDialog.SAVE);
 				fd.addWindowListener (new WindowAdapter() {
 					public void windowClosing(WindowEvent ee){
 					System.exit(0);
@@ -205,7 +204,7 @@ public class Jfra{
 			}
 	    	
 	    });
-	    //µã»÷ÉÏ´«´ğ°¸µÄÊÂ¼ş
+	    //ç‚¹å‡»ä¸Šä¼ ç­”æ¡ˆçš„äº‹ä»¶
 	    b3.addActionListener(new ActionListener() {
 
 			@Override
@@ -213,7 +212,7 @@ public class Jfra{
 				// TODO Auto-generated method stub
 				a2.setText("");
 				a3.setText("");
-				FileDialog fd = new FileDialog(jfr,"´ò¿ª",FileDialog.LOAD);
+				FileDialog fd = new FileDialog(jfr,"æ‰“å¼€",FileDialog.LOAD);
 				fd.addWindowListener (new WindowAdapter() {
 					public void windowClosing(WindowEvent ee){
 					System.exit(0);
@@ -240,7 +239,7 @@ public class Jfra{
 				}
 			}
 	    });
-	    //µã»÷ºË¶Ô´ğ°¸µÄÊÂ¼ş
+	    //ç‚¹å‡»æ ¸å¯¹ç­”æ¡ˆçš„äº‹ä»¶
 	    b4.addActionListener(new ActionListener() {
 
 			@Override
@@ -251,16 +250,16 @@ public class Jfra{
 				int correct = 0,error = 0;
 				for(int i = 0; i < ansline.length ; i++) {
 					if(anslist.get(i).equals(ansline[i])){
-						a3.append("¡Ì" + " " + "Õı´ğ£º" + " " + anslist.get(i) + '\n');
+						a3.append("âˆš" + " " + "æ­£ç­”ï¼š" + " " + anslist.get(i) + '\n');
 						correct++;
 					}else {
-						a3.append("¡Á"  + " " +"Õı´ğ£º" + " " + anslist.get(i)+ '\n');
+						a3.append("Ã—"  + " " +"æ­£ç­”ï¼š" + " " + anslist.get(i)+ '\n');
 						error++;
 						
 					}
 				}
-				a3.append("ÕıÈ·ÊıÄ¿Îª£º" + correct + '\n');
-				a3.append("´íÎóÊıÄ¿Îª£º" + error + '\n');
+				a3.append("æ­£ç¡®æ•°ç›®ä¸ºï¼š" + correct + '\n');
+				a3.append("é”™è¯¯æ•°ç›®ä¸ºï¼š" + error + '\n');
 			}
 	    	
 	    });
