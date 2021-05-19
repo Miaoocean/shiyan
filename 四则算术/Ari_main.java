@@ -3,12 +3,11 @@ package arithmetic;
 public class Ari_main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		//´´½¨¿ÉÊÓ»¯½çÃæ
+        
+		//åˆ›å»ºå¯è§†åŒ–ç•Œé¢
 		Jfra jf = new Jfra();
 		
-		//²âÊÔdupCheck(string,string)¼´×Ö·û´®²éÖØ¹¦ÄÜ)
+		//æµ‹è¯•dupCheck(string,string)å³å­—ç¬¦ä¸²æŸ¥é‡åŠŸèƒ½)
 		/*DupCheck dw = new DupCheck();
 		String str1 = "1'1/1 + 2/1 + 3";
 		String str2 = "2/1 +  1'1/1 + 3 ";
