@@ -49,15 +49,23 @@ public class formJudge {
 		}
 		return str;
 	}
-    //¼ÆËã½á¹û
+    
+    //è®¡ç®—ç»“æœ
     public String calculate(String calStr) {
-        List<Item> infixes = parse(calStr);//½«×Ö·û´®×ª»¯ÎªºÏÀíµÄÁĞ±í
-        List<Item> postfixes = infix2postfix(infixes);//½«µÃµ½µÄÁĞ±í×ª»¯³Éºó×º±í´ïÊ½ÁĞ±í
-        return calculateByPostfix(postfixes);//Í¨¹ıºó×º±í´ïÊ½¼ÆËã½á¹û²¢·µ»Ø
+        List<Item> infixes = parse(calStr);
+        
+        //å°†å­—ç¬¦ä¸²è½¬åŒ–ä¸ºåˆç†çš„åˆ—è¡¨
+        List<Item> postfixes = infix2postfix(infixes);
+        
+        //å°†å¾—åˆ°çš„åˆ—è¡¨è½¬åŒ–æˆåç¼€è¡¨è¾¾å¼åˆ—è¡¨
+        return calculateByPostfix(postfixes);
+        
+        //é€šè¿‡åç¼€è¡¨è¾¾å¼è®¡ç®—ç»“æœå¹¶è¿”å›
     }
-    //ÓÃËÄÔò±í´ïÊ½Æ¥ÅäÊµÏÖ½«×Ö·û´®×ª»¯³ÉºÏÀíµÄÁĞ±í
+    
+    //ç”¨å››åˆ™è¡¨è¾¾å¼åŒ¹é…å®ç°å°†å­—ç¬¦ä¸²è½¬åŒ–æˆåˆç†çš„åˆ—è¡¨
     public List<Item> parse(String calStr) {
-        Pattern pattern = Pattern.compile("\\d+\\/\\d+|\\+|\\-|\\¡Á|\\¡Â|\\(|\\)|\\d+\\'\\d+\\/\\d+|\\d+");
+        Pattern pattern = Pattern.compile("\\d+\\/\\d+|\\+|\\-|\\Ã—|\\Ã·|\\(|\\)|\\d+\\'\\d+\\/\\d+|\\d+");
         Matcher m = pattern.matcher(calStr);
         List<Item> items = new ArrayList<Item>();
         while (m.find()) {
@@ -65,48 +73,57 @@ public class formJudge {
         }
         return items;
     }
-    
-    //ÖĞ×º±í´ïÊ½×ª»»Îªºó×º±í´ïÊ½Ëã·¨
-    /* 1.Èç¹û¶Áµ½Êı£¬½«Ëü·Åµ½Êä³öÖĞ¡£
-     * 2.Èç¹û¶Áµ½µÄÊÇ²Ù×÷·ûÔòĞèÒª½Ó×ÅÅĞ¶ÏÊÇ·ñ¸ÃÈëÕ»¡£
-     * 2.1 Èô¶Áµ½µÄÊÇ×óÔ²À¨ºÅÔòÈëÕ»¡£
-    * 2.2 Èç¹ûÓöµ½Ò»¸öÓÒÀ¨ºÅ£¬ÄÇÃ´¾Í½«Õ»ÖĞÔªËØµ¯³ö²¢Êä³öÖ±ÖÁÓöµ½×óÀ¨ºÅÎªÖ¹¡£µ«ÊÇÕâ¸ö×óÀ¨ºÅÖ»±»µ¯³ö£¬²¢²»Êä³ö¡£
-    * 3.ÔÚ¶Áµ½²Ù×÷·ûÊ±£¬Èç¹û´Ë²Ù×÷·ûÓÅÏÈ¼¶Ğ¡ÓÚ»òµÈÓÚ´ËÊ±Õ»¶¥²Ù×÷·û£¬Ôò½«Õ»ÖĞÔªËØµ¯³öÖ±µ½ÒÔÏÂÇé¿ö
-    * 3.1 Óöµ½×óÀ¨ºÅ
-    * 3.2 Õ»¶¥ÔªËØÎª¸üµÍÓÅÏÈ¼¶
-    * 3.3 Õ»Îª¿Õ
-       * ×¢£º²Ù×÷·ûÖĞ£¬'+''-'ÓÅÏÈ¼¶×îµÍ£¬'('')'ÓÅÏÈ¼¶×î¸ß
-    * 4.Èç¹û¶Áµ½ÊäÈëµÄÄ©Î²£¬½«Õ»ÔªËØµ¯³öÖ±µ½¸ÃÕ»±ä³É¿ÕÕ»£¬½«·ûºÅĞ´µ½Êä³öÖĞ¡£*/           
+             
  
     public List<Item> infix2postfix(List<Item> infixes) {
-        List<Item> postfixes = new ArrayList<Item>();//´´½¨ÁĞ±í´æ´¢
-        Stack<Item> stack = new Stack<Item>();//ĞÂ½¨Õ»´æ´¢ÖĞ¼ä²Ù×÷·û
-        for (Item item : infixes) {//±éÀúÖĞ×º±í´ïÊ½ÁĞ±í
-        	if (item.isBlank()) {//ÈôÎª¿Õ¸ñ£¬Ôò¼ÌĞø±ã±éÀú
+        List<Item> postfixes = new ArrayList<Item>();
+        
+        //åˆ›å»ºåˆ—è¡¨å­˜å‚¨
+        Stack<Item> stack = new Stack<Item>();
+        
+        //æ–°å»ºæ ˆå­˜å‚¨ä¸­é—´æ“ä½œç¬¦
+        for (Item item : infixes) {
+            
+            //éå†ä¸­ç¼€è¡¨è¾¾å¼åˆ—è¡¨
+        	if (item.isBlank()) {
+                
+                //è‹¥ä¸ºç©ºæ ¼ï¼Œåˆ™ç»§ç»­ä¾¿éå†
         		continue;
         	}
-            if (item.isNumber()) {//ÈôÎªÊı×ÖÔòÖ±½ÓÊä³ö
+            if (item.isNumber()) {
+                
+                //è‹¥ä¸ºæ•°å­—åˆ™ç›´æ¥è¾“å‡º
                 postfixes.add(item);
-            } else if (item.isRightBracket()) {//ÈôÎªÓÒÀ¨ºÅÔò½«ÔªËØµ¯³öÖ±µ½Óöµ½×óÀ¨ºÅ
+            } else if (item.isRightBracket()) {
+                
+                //è‹¥ä¸ºå³æ‹¬å·åˆ™å°†å…ƒç´ å¼¹å‡ºç›´åˆ°é‡åˆ°å·¦æ‹¬å·
                 while (true) {
                     Item tmp = stack.pop();
                     if (tmp.isLeftBracket())
                         break;
                     postfixes.add(tmp);
                 }
-            } else if (item.isLeftBracket()) {//ÈôÎª×óÀ¨ºÅ½«×óÀ¨ºÅÑ¹ÈëÕ»
+            } else if (item.isLeftBracket()) {
+                
+                //è‹¥ä¸ºå·¦æ‹¬å·å°†å·¦æ‹¬å·å‹å…¥æ ˆ
                 stack.push(item);
             } else {
-                if (stack.isEmpty()) {//ÈôÕ»Îª¿ÕÔò½«µ±Ç°×Ö·ûÑ¹ÈëÕ»
+                if (stack.isEmpty()) {
+                    
+                    //è‹¥æ ˆä¸ºç©ºåˆ™å°†å½“å‰å­—ç¬¦å‹å…¥æ ˆ
                     stack.push(item);
                     continue;
                 }
                 Item top = stack.peek();
-                if (top.isLeftBracket()) {//ÈôÎª×óÀ¨ºÅ½«ÆäÖ±½ÓÑ¹ÈëÕ»
+                if (top.isLeftBracket()) {
+                    
+                    //è‹¥ä¸ºå·¦æ‹¬å·å°†å…¶ç›´æ¥å‹å…¥æ ˆ
                     stack.push(item);
                     continue;
                 }
-                if (item.getPriority() <= top.getPriority()) {//ÅĞ¶ÏÓÅÏÈ¼¶£¬Èôµ±Ç°ÓÅÏÈ¼¶Ğ¡ÓÚµÈÓÚÕ»¶¥£¬Ôò½«Õ»ÖĞÔªËØµ¯³öÖ±µ½Ë¼Â·ÖĞÌáµ½µÄ3.1£¬3.2£¬3.3ÈıÖÖÇé¿ö
+                if (item.getPriority() <= top.getPriority()) {
+                    
+                    //åˆ¤æ–­ä¼˜å…ˆçº§ï¼Œè‹¥å½“å‰ä¼˜å…ˆçº§å°äºç­‰äºæ ˆé¡¶ï¼Œåˆ™å°†æ ˆä¸­å…ƒç´ å¼¹å‡ºç›´åˆ°æ€è·¯ä¸­æåˆ°çš„3.1ï¼Œ3.2ï¼Œ3.3ä¸‰ç§æƒ…å†µ
                     while (true) {
                         Item tmp = stack.peek();
                         if (tmp.isLeftBracket() || tmp.getPriority() < item.getPriority()) {
@@ -123,13 +140,15 @@ public class formJudge {
                 }
             }
         }
-        while (!stack.isEmpty()) {//Èô½áÊøºóÕ»²»Îª¿ÕÔòÖ±½ÓÊä³öÊ£ÓàÔªËØ
+        while (!stack.isEmpty()) {
+            
+            //è‹¥ç»“æŸåæ ˆä¸ä¸ºç©ºåˆ™ç›´æ¥è¾“å‡ºå‰©ä½™å…ƒç´ 
             postfixes.add(stack.pop());
         }
         return postfixes;
     }
 
-    //½«·ÖÊıµÄ×Ö·û´®ĞÎÊ½×ª»¯³ÉÓÉintĞÍ·Ö×Ó·ÖÄ¸×é³ÉµÄNumberĞÎÊ½
+    //å°†åˆ†æ•°çš„å­—ç¬¦ä¸²å½¢å¼è½¬åŒ–æˆç”±intå‹åˆ†å­åˆ†æ¯ç»„æˆçš„Numberå½¢å¼
     public Number returnNum(String value) {
     	Number num = new Number();
     	try {
@@ -140,19 +159,26 @@ public class formJudge {
         }
     	return num;
     }
-    //Í¨¹ıºó×º±í´ïÊ½¼ÆËãÊıÖµ
-     /* 1. ´Ó×óµ½ÓÒ±éÀú±í´ïÊ½µÄÃ¿¸öÊı×ÖºÍ·ûºÅ
-      * 1.1 ÈôÊÇÊı×ÖÔò½øÕ»
-      * 1.2 ÈôÊÇÔËËã·ûÔò½«Õ»¶¥Á½¸öÔªËØ³öÕ»,½øĞĞÔËËã²¢½«ÔËËã½á¹û½øÕ»
-     * 2. ±éÀúÍêºó×º±í´ïÊ½,´ËÊ±Õ»ÖĞÊ£ÓàµÄÊı×Ö¾ÍÊÇÔËËã½á¹û
+    
+    //é€šè¿‡åç¼€è¡¨è¾¾å¼è®¡ç®—æ•°å€¼
+     /* 1. ä»å·¦åˆ°å³éå†è¡¨è¾¾å¼çš„æ¯ä¸ªæ•°å­—å’Œç¬¦å·
+      * 1.1 è‹¥æ˜¯æ•°å­—åˆ™è¿›æ ˆ
+      * 1.2 è‹¥æ˜¯è¿ç®—ç¬¦åˆ™å°†æ ˆé¡¶ä¸¤ä¸ªå…ƒç´ å‡ºæ ˆ,è¿›è¡Œè¿ç®—å¹¶å°†è¿ç®—ç»“æœè¿›æ ˆ
+     * 2. éå†å®Œåç¼€è¡¨è¾¾å¼,æ­¤æ—¶æ ˆä¸­å‰©ä½™çš„æ•°å­—å°±æ˜¯è¿ç®—ç»“æœ
      */
     private String calculateByPostfix(List<Item> postfixes) {
         Stack<String> stack = new Stack<String>();
-        for (Item item : postfixes) {//±éÀúºó×º±í´ïÊ½
-            if (item.isNumber()) {//ÈôÎªÊıÔòÖ±½ÓÈëÕ»
+        for (Item item : postfixes) {
+            
+            //éå†åç¼€è¡¨è¾¾å¼
+            if (item.isNumber()) {
+                
+                //è‹¥ä¸ºæ•°åˆ™ç›´æ¥å…¥æ ˆ
                 stack.push(item.value);
-            } else {//ÈôÎª²Ù×÷·ûÔò½«Õ»¶¥Á½¸öÔªËØÈ¡³ö²¢½øĞĞÏàÓ¦ÔËËã
-            	//½«µÃµ½µÄÁ½¸ö×Ö·û´®·ÖÊı×ª»¯³ÉNumberĞÍ
+            } else {
+                
+                //è‹¥ä¸ºæ“ä½œç¬¦åˆ™å°†æ ˆé¡¶ä¸¤ä¸ªå…ƒç´ å–å‡ºå¹¶è¿›è¡Œç›¸åº”è¿ç®—
+            	//å°†å¾—åˆ°çš„ä¸¤ä¸ªå­—ç¬¦ä¸²åˆ†æ•°è½¬åŒ–æˆNumberå‹
             	String num_1,num_2;
             	Number num1 = new Number();
                 Number num2 = new Number();
@@ -161,17 +187,27 @@ public class formJudge {
                 num_2 = stack.pop();
                 num1 = returnNum(num_1);
                 num2 = returnNum(num_2);
-                if (item.isAdd()) {//¼ÆËã¼Ó·¨
+                if (item.isAdd()) {
+                    
+                    //è®¡ç®—åŠ æ³•
                     result.a = num2.a * num1.b + num1.a * num2.b;
                     result.b = num2.b * num1.b;
-                } else if (item.isSub()) {//¼ÆËã¼õ·¨
+                } else if (item.isSub()) {
+                    
+                    //è®¡ç®—å‡æ³•
                 	result.a = num2.a * num1.b - num1.a * num2.b;
                     result.b = num2.b * num1.b;
-                    if(result.a < 0) return null;//ÈôÎª¸ºÊıÔò²»Éú³É´ğ°¸
-                } else if (item.isMul()) {//¼ÆËã³Ë·¨
+                    if(result.a < 0) return null;
+                    
+                    //è‹¥ä¸ºè´Ÿæ•°åˆ™ä¸ç”Ÿæˆç­”æ¡ˆ
+                } else if (item.isMul()) {
+                    
+                    //è®¡ç®—ä¹˜æ³•
                 	result.a = num2.a * num1.a;
                 	result.b = num2.b * num1.b;
-                } else if (item.isDiv()) {//¼ÆËã³ı·¨
+                } else if (item.isDiv()) {
+                    
+                    //è®¡ç®—é™¤æ³•
                 	result.a = num2.a * num1.b;
                 	result.b = num2.b * num1.a;
                 } else {
@@ -180,7 +216,8 @@ public class formJudge {
                 stack.push(result.a + "/" + result.b);            
             }
         }
-        //·µ»Ø»¯¼ò³É·ÖÊı»òÕûÊı»ò´ø·ÖÊıµÄ½á¹û
+        
+        //è¿”å›åŒ–ç®€æˆåˆ†æ•°æˆ–æ•´æ•°æˆ–å¸¦åˆ†æ•°çš„ç»“æœ
         Number num = new Number();
         String ans = stack.pop();
         num = returnNum(ans);
@@ -188,7 +225,7 @@ public class formJudge {
         else return improSimple(num.a,num.b);
     }
     
-    //½«ÁĞ±íÀàĞÍ×ª»¯Îª×Ö·û´®ÀàĞÍ
+    //å°†åˆ—è¡¨ç±»å‹è½¬åŒ–ä¸ºå­—ç¬¦ä¸²ç±»å‹
     public String listToString(List<Item> list) {
     	StringBuilder sb = new StringBuilder();
     	for(int i = 0; i < list.size(); i++) {
@@ -198,7 +235,8 @@ public class formJudge {
     }
 		
 }
-//Ò»¸ö·ÖÊıµÄ´æ´¢
+
+//ä¸€ä¸ªåˆ†æ•°çš„å­˜å‚¨
 class Number{
 	int a;
 	int b;
@@ -232,11 +270,11 @@ class Item {
     }
 
     public boolean isMul() {
-        return "¡Á".equals(value);
+        return "Ã—".equals(value);
     }
 
     public boolean isDiv() {
-        return "¡Â".equals(value);
+        return "Ã·".equals(value);
     }
 
     public boolean isLeftBracket() {
